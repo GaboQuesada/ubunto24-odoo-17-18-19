@@ -1,0 +1,12 @@
+como vemos es importante definier el puerto gavent 
+
+también debemos instalarlo 
+
+sudo apt install python3-gevent -y
+
+[options]
+; ...
+proxy_mode = True
+workers = 2
+gevent_port = 8072
+; ...
