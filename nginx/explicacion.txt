@@ -40,6 +40,16 @@ cd sites-available
 
 sudo ln -s /etc/nginx/sites-available/gqsoluciones.conf /etc/nginx/sites-enabled/
 
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+# instalr lets script 
+
+sudo apt install certbot python3-certbot-nginx -y
+
+sudo certbot --nginx -d gustos.sistemaodoo.com -d gustos.sistemaodoo.com
+
 
 
 
