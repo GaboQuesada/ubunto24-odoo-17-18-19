@@ -25,10 +25,7 @@ server {
     # CAMBIA ESTO POR TU DOMINIO REAL (ej: .com, .net, .cr)
     server_name gustos.sistemaodoo.com www.gustos.sistemaodoo.com;
 
-    # Bloque necesario para la verificación de Let's Encrypt
-    location /.well-known/acme-challenge/ {
-        root /var/www/html;
-    }
+  
 
     # Redirecciona todo lo demás a HTTPS
     location / {
