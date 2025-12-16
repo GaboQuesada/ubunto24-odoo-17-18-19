@@ -48,7 +48,9 @@ sudo systemctl restart nginx
 
 sudo apt install certbot python3-certbot-nginx -y
 
-sudo certbot --nginx -d gustos.sistemaodoo.com -d gustos.sistemaodoo.com
+sudo certbot --nginx -d gustos.sistemaodoo.com -d www.gustos.sistemaodoo.com
+
+sudo ufw allow 'Nginx Full'
 
 
 
