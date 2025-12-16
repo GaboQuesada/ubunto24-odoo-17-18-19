@@ -1,3 +1,12 @@
 # saber si nginx esta instalado
 
-aqui
+sudo systemctl status nginx
+
+# Verificar la versión
+
+nginx -v
+
+# Buscar en los paquetes instalados
+
+dpkg -l | grep nginx
+
