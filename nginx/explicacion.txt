@@ -20,6 +20,27 @@ sudo apt install nginx -y
 
 # creamos el archivo gqsoluciones.conf
 
+en /etc/nginx/sites-available
+
+cd sites-available
+
+nano gqsoluciones.conf
+
+borar en 
+
+..cd
+
+cd sites-enabled
+
+rm default
+
+..cd 
+
+cd /sites-available
+
+sudo ln -s /etc/nginx/sites-available/gqsoluciones.conf /etc/nginx/sites-enabled/
+
+
 
 
 
