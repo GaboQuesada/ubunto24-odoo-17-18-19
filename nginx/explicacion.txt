@@ -1,0 +1,3 @@
+# saber si nginx esta instalado
+
+aqui
