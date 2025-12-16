@@ -10,3 +10,12 @@ nginx -v
 
 dpkg -l | grep nginx
 
+#instalar NGINX
+
+sudo apt update
+
+apt list --upgradable
+
+
+
+
