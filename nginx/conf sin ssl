@@ -11,19 +11,19 @@ upstream odoochat {
 
 # --- REDIRECCIÓN HTTP A HTTPS ---
 server {
-    if ($host = www.odoo.gqsoluciones.com) {
+    if ($host = www.gustos.sistemaodoo.com) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
-    if ($host = odoo.gqsoluciones.com) {
+    if ($host = gustos.sistemaodoo.com) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
     listen 80;
     # CAMBIA ESTO POR TU DOMINIO REAL (ej: .com, .net, .cr)
-    server_name odoo.gqsoluciones.com www.odoo.gqsoluciones.com;
+    server_name gustos.sistemaodoo.com www.gustos.sistemaodoo.com;
 
     # Bloque necesario para la verificación de Let's Encrypt
     location /.well-known/acme-challenge/ {
@@ -44,7 +44,7 @@ server {
 server {
     listen 443 ssl;
     # CAMBIA ESTO POR TU DOMINIO REAL
-    server_name odoo.gqsoluciones.com www.odoo.gqsoluciones.com;
+    server_name gustos.sistemaodoo.com www.gustos.sistemaodoo.com;
 
     # Logs específicos para este dominio (útil para diagnosticar errores)
     access_log /var/log/nginx/gqsoluciones.access.log;
