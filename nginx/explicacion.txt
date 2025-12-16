@@ -28,17 +28,18 @@ nano gqsoluciones.conf
 
 borar en 
 
-..cd
+cd..
 
 cd sites-enabled
 
 rm default
 
-..cd 
+cd.. 
 
-cd /sites-available
+cd sites-available
 
 sudo ln -s /etc/nginx/sites-available/gqsoluciones.conf /etc/nginx/sites-enabled/
+
 
 
 
