@@ -1,54 +1,22 @@
 # --- UPSTREAMS ---
-# Odoo Backend (Tráfico normal)
 upstream odoo {
     server 127.0.0.1:8069;
 }
 
-# Odoo Chat/Websockets (Tráfico tiempo real - Puerto Gevent)
 upstream odoochat {
     server 127.0.0.1:8072;
 }
 
-# --- REDIRECCIÓN HTTP A HTTPS ---
+# --- SERVIDOR HTTP (SIN SSL) ---
 server {
-    if ($host = www.gustos.sistemaodoo.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-    if ($host = gustos.sistemaodoo.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
     listen 80;
-    # CAMBIA ESTO POR TU DOMINIO REAL (ej: .com, .net, .cr)
     server_name gustos.sistemaodoo.com www.gustos.sistemaodoo.com;
 
-  
+    # He actualizado el nombre de los logs para que coincidan con este dominio
+    access_log /var/log/nginx/gustos.access.log;
+    error_log /var/log/nginx/gustos.error.log;
 
-    # Redirecciona todo lo demás a HTTPS
-    location / {
-        return 301 https://$host$request_uri;
-    }
-
-
-
-
-}
-
-# --- SERVIDOR PRINCIPAL (HTTPS) ---
-server {
-    listen 443 ssl;
-    # CAMBIA ESTO POR TU DOMINIO REAL
-    server_name gustos.sistemaodoo.com www.gustos.sistemaodoo.com;
-
-    # Logs específicos para este dominio (útil para diagnosticar errores)
-    access_log /var/log/nginx/gqsoluciones.access.log;
-    error_log /var/log/nginx/gqsoluciones.error.log;
-
-
-    # Tiempos de espera (Odoo a veces tarda en procesos largos)
+    # Tiempos de espera
     proxy_read_timeout 720s;
     proxy_connect_timeout 720s;
     proxy_send_timeout 720s;
@@ -59,8 +27,7 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Real-IP $remote_addr;
 
-    # --- CONFIGURACIÓN CRÍTICA PARA EL CHAT ODOO 19 ---
-    # Redirecciona la ruta /websocket al puerto 8072
+    # --- CHAT / WEBSOCKETS ---
     location /websocket {
         proxy_pass http://odoochat;
         proxy_set_header Upgrade $http_upgrade;
@@ -71,15 +38,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 
-    # --- RESTO DE LA APLICACIÓN ---
+    # --- ODOO WEB ---
     location / {
         proxy_pass http://odoo;
         proxy_redirect off;
     }
 
-    # Compresión para velocidad
+    # Compresión
     gzip on;
     gzip_min_length 1000;
     gzip_types text/plain text/css application/json application/javascript text/xml;
-
 }
