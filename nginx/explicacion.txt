@@ -16,6 +16,13 @@ sudo apt update
 
 apt list --upgradable
 
+sudo apt install nginx -y
+
+# creamos el archivo gqsoluciones.conf
+
+
+
+
 
 
 
